@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             {
                 Toast.makeText(applicationContext,"Please enter time",Toast.LENGTH_SHORT).show()
             }
-            else if(Integer.valueOf(etSec.text.toString())>59)
+            else if(Integer.valueOf(if(etSec.text.toString()=="") "0" else etSec.text.toString())>59)
             {
                 Toast.makeText(applicationContext,"Seconds cannot be greater than 59",Toast.LENGTH_SHORT).show()
             }
@@ -104,7 +104,11 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(applicationContext,"Timer reset\nClick 'START' button to start the timer",Toast.LENGTH_SHORT).show()
         }
     }
-    inner class StopWatch: AsyncTask<Int, Int, Int>() {
+
+    //You can also use the coroutineAsyncTask class created custom. It doesnt completely match the AsyncTask but works fine for this project
+    //inner class StopWatch: CoroutineAsyncTask<Int, Int, Int>() {
+
+    inner class StopWatch: AsyncTask<Int,Int,Int>(){
         override fun doInBackground(vararg params: Int?): Int {
             var minutes=params[0]
             var seconds=params[1]
